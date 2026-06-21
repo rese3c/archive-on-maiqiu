@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>再访 · 买球站</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #f0f7fa;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #1e2c3a;
+      padding: 0 1rem;
+    }
+    .page {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 0 3rem;
+    }
+    /* hero 横幅卡片 */
+    .hero {
+      background: linear-gradient(135deg, #1f5f6c 0%, #2b8c9e 100%);
+      border-radius: 2rem 2rem 1rem 1rem;
+      box-shadow: 0 12px 30px rgba(27, 94, 105, 0.25);
+      padding: 3.2rem 2rem 2.8rem;
+      color: white;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: 20%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      position: relative;
+      z-index: 1;
+    }
+    .hero .sub {
+      font-size: 1rem;
+      margin-top: 0.8rem;
+      opacity: 0.85;
+      font-weight: 300;
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero .badge {
+      display: inline-block;
+      margin-top: 1.6rem;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(4px);
+      padding: 0.5rem 1.4rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #e0f2f5;
+      position: relative;
+      z-index: 1;
+    }
+    /* 背景说明格 */
+    .context-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.2rem;
+    }
+    .context-card {
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.5rem 1.2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      border: 1px solid #daeef2;
+    }
+    .context-card h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: #1f5f6c;
+    }
+    .context-card p {
+      font-size: 0.95rem;
+      color: #2f4050;
+    }
+    .context-card .icon-em {
+      font-size: 1.2rem;
+    }
+    /* 三段自然介绍卡片 (杂志风格) */
+    .intro-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+      margin: 2.2rem 0 2.5rem;
+    }
+    .intro-item {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.8rem 1.4rem;
+      box-shadow: 0 2px 8px rgba(0,35,45,0.04);
+      border-left: 3px solid #2b8c9e;
+      transition: all 0.15s ease;
+    }
+    .intro-item:hover {
+      border-left-width: 4px;
+      box-shadow: 0 6px 16px rgba(30, 100, 110, 0.08);
+    }
+    .intro-item h2 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #1a4954;
+      margin-bottom: 0.6rem;
+    }
+    .intro-item p {
+      color: #2a3c4a;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+    .intro-item .meta-note {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: #587e88;
+      background: #e7f3f6;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      margin-top: 0.4rem;
+    }
+    /* 特色网格卡片 */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin: 1.8rem 0 2.5rem;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.2rem 0.8rem;
+      text-align: center;
+      border: 1px solid #d6e9ed;
+      box-shadow: 0 2px 6px rgba(27,94,105,0.03);
+    }
+    .feature-card .num {
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: #2b8c9e;
+    }
+    .feature-card .label {
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+      color: #2e4c57;
+      font-weight: 450;
+    }
+    .feature-card .desc {
+      font-size: 0.8rem;
+      color: #56747d;
+      margin-top: 0.25rem;
+    }
+    /* FAQ 摘要 */
+    .faq-preview {
+      background: #e2f0f4;
+      border-radius: 1.5rem;
+      padding: 1.4rem 1.2rem;
+      margin: 2rem 0 1.8rem;
+    }
+    .faq-preview h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #1b5a66;
+      margin-bottom: 0.7rem;
+    }
+    .faq-item {
+      display: flex;
+      gap: 0.6rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px dashed rgba(43,140,158,0.2);
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-item .q {
+      color: #1f5f6c;
+      font-weight: 450;
+      min-width: 5rem;
+    }
+    .faq-item .a {
+      color: #2b3f49;
+      font-size: 0.9rem;
+    }
+    /* 页尾提示 + 链接 */
+    .footer-prompt {
+      background: white;
+      border-radius: 1.8rem;
+      padding: 1.8rem 1.6rem;
+      text-align: center;
+      border: 1px solid #cde3e8;
+      margin-top: 1rem;
+    }
+    .footer-prompt p {
+      font-size: 0.98rem;
+      color: #1a3f48;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .footer-prompt .link-warp {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+    .footer-prompt a {
+      color: #1b6b7a;
+      text-decoration: none;
+      font-weight: 500;
+      background: #e2f2f6;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      transition: background 0.15s, color 0.1s;
+    }
+    .footer-prompt a:hover {
+      background: #c7e5ed;
+      color: #054652;
+    }
+    .footer-small {
+      margin-top: 2.2rem;
+      font-size: 0.78rem;
+      text-align: center;
+      color: #698c96;
+    }
+    /* 响应式 */
+    @media (max-width: 600px) {
+      .hero { padding: 2.5rem 1.2rem 2rem; }
+      .hero h1 { font-size: 1.7rem; }
+      .context-grid { grid-template-columns: 1fr; }
+      .intro-item { padding: 1.4rem 1rem; }
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+      .faq-item { flex-direction: column; gap: 0.2rem; }
+      .faq-item .q { min-width: auto; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <!-- hero 横幅 -->
+  <div class="hero">
+    <h1>再一次，安静地打开</h1>
+    <div class="sub">收藏一个熟悉的地址，如同在书里夹一枚书签。</div>
+    <span class="badge">✦ 杂志 · 持续关注</span>
+  </div>
+
+  <!-- 背景说明：双卡片 -->
+  <div class="context-grid">
+    <div class="context-card">
+      <h3><span class="icon-em">↻</span> 再次返回</h3>
+      <p>有些页面值得反复打开，不是因为它张扬，而是因为稳定、直接，以及一种不必多言的默契。</p>
+    </div>
+    <div class="context-card">
+      <h3><span class="icon-em">☆</span> 收藏的角落</h3>
+      <p>在浏览器的收藏夹里，总有一些链接你不想删掉。它们不喧哗，只是安静地待在那里，等你某天再次点开。</p>
+    </div>
+  </div>
+
+  <!-- 三段自然介绍：杂志感 -->
+  <div class="intro-section">
+    <div class="intro-item">
+      <h2>从一次浏览到持续关注</h2>
+      <p>很多时候，我们第一次看到某个网站只是因为一个简单的搜索。之后，可能隔了几天、几周，又会想起。这种自然的回访，往往比任何推送都更真实。</p>
+      <p>如果你也偶尔想起某个页面，不妨把它放在一个顺手的位置。不急着做什么，只是留着。</p>
+      <span class="meta-note">慢节奏 · 回访</span>
+    </div>
+    <div class="intro-item">
+      <h2>关于 <a href="https://on-maiqiu.com" style="color: #1b6b7a; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #5fa7b5;">买球站</a> 的一点说明</h2>
+      <p>它不是一个需要被反复介绍的地方，更像是一个安静的功能空间。你清楚它的作用，也明白它的边界。不需要太多修饰，稳定、直接，足矣。</p>
+      <p>我们更愿意把它看作一个工具——打开，完成，然后关闭。干净，没有多余的动作。</p>
+    </div>
+    <div class="intro-item">
+      <h2>保留一个熟悉的入口</h2>
+      <p>收藏夹里有很多链接，有的失效了，有的变了模样。但总有几个始终如一。<a href="https://on-maiqiu.com" style="color: #1b6b7a; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #5fa7b5;">买球站</a>就是其中之一：不改变风格，不堆砌信息，只是提供它一直提供的东西。</p>
+      <p>如果你愿意，可以将它加入书签。下次再来时，界面依然熟悉，节奏也依然由你掌控。</p>
+      <span class="meta-note">收藏 · 如常</span>
+    </div>
+  </div>
+
+  <!-- 网格卡片：特点摘要 -->
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="num">·</div>
+      <div class="label">直白</div>
+      <div class="desc">没有冗余干扰</div>
+    </div>
+    <div class="feature-card">
+      <div class="num">·</div>
+      <div class="label">稳定</div>
+      <div class="desc">一如既往的表现</div>
+    </div>
+    <div class="feature-card">
+      <div class="num">·</div>
+      <div class="label">清爽</div>
+      <div class="desc">视觉保持克制</div>
+    </div>
+    <div class="feature-card">
+      <div class="num">·</div>
+      <div class="label">自洽</div>
+      <div class="desc">功能与界面一致</div>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-preview">
+    <h3>常见想法 · 简短回应</h3>
+    <div class="faq-item">
+      <span class="q">为何收藏？</span>
+      <span class="a">一个习惯。把常用的地方收好，下次不用费心寻找。</span>
+    </div>
+    <div class="faq-item">
+      <span class="q">会变吗？</span>
+      <span class="a">风格和核心结构保持稳定。小调整会提前知会。</span>
+    </div>
+    <div class="faq-item">
+      <span class="q">适合谁？</span>
+      <span class="a">任何需要直接、不绕弯子体验的人。</span>
+    </div>
+  </div>
+
+  <!-- 页尾提示 + 链接 -->
+  <div class="footer-prompt">
+    <p>如果你愿意，可以把这里当作一个安静的站点入口：不需要反复确认，只是偶尔回来看看。</p>
+    <div class="link-warp">
+      <a href="https://on-maiqiu.com">买球站</a>
+    </div>
+    <p style="margin-top: 1rem; font-size: 0.85rem; color: #4a6f7a;">一个不需要多作介绍的地方，你知道它在哪里。</p>
+  </div>
+
+  <div class="footer-small">
+    页面内容持续调整 · 不定期回来看看
+  </div>
+</div>
+</body>
+</html>
